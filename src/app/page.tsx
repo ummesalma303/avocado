@@ -1,12 +1,11 @@
-import Banner from "@/components/ui/Banner";
-import { Button } from "@/components/ui/button"
+import Banner from "@/components/Banner";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (
     <div>
+      <Navbar/>
       <Banner/>
-     <h2>start avocado project</h2>
-     <Button>Click me</Button>
     </div>
   );
 }
