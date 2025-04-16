@@ -52,7 +52,7 @@ const Navbar = () => {
       <div className="hidden md:flex space-x-3">
       
         <Link href='/'>Home</Link>
-        <Link href='/'>Add Foods</Link>
+        <Link href='/add-foods'>Add Foods</Link>
         <Link href='/'>All Foods</Link>
       </div>
 
