@@ -8,12 +8,39 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { toast } from "sonner"
 
 const FoodForm = () => {
     const { register, handleSubmit,  formState: { errors } } = useForm();
-    const onSubmit = (data:object) => {
+    // post data in mongodb
+    const onSubmit = async (foodData:object) => {
+      console.log(foodData)
+      try {
+       const res = await fetch('http://localhost:3000/api/foods', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(foodData),
+      })
+      const data = await res.json()
+      if ( data.insertedId) {
+        toast("Event has been created", {
+          description: "Sunday, December 03, 2023 at 9:00 AM",
+          action: {
+            label: "Undo",
+            onClick: () => console.log("Undo"),
+          },
+        })
+        console.log('dg--------fss')
+      }
       console.log(data)
-    };
+    
+      } catch (error) {
+        console.log(error)
+      }
+    };   
+
   return (
     <div>
        <Card className="w-xl mx-auto bg-gray-300 mt-6">
