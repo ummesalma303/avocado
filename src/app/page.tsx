@@ -1,5 +1,5 @@
 import Banner from "@/components/Banner";
-import Card from "@/components/Card";
+// import Card from "@/components/Card";
 import Deals from "@/components/Deals";
 
 export default function Home() {
@@ -7,7 +7,7 @@ export default function Home() {
     <div>
       
       <Banner/>
-      <Card/>
+      {/* <Card/> */}
       <Deals/>
      
     </div>

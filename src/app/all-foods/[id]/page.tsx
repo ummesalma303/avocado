@@ -1,14 +1,16 @@
+import DetailsCard from '@/components/DetailsCard'
 import dbConnect, { collection } from '@/lib/dbConnect'
 import React from 'react'
 
 const FoodDetails = async () => {
     const foodDetails = await dbConnect(collection.foods).findOne()
-    // const {foodName,} = foodDetails || {}
+    // const {foodName,foodImage} = foodDetails || {}
+    
     console.log(foodDetails)
   return (
-    <div>
-        <h2>{foodDetails?.foodName}</h2>
-      Food Details
+    <div className='w-11/12 mx-auto my-10'>
+      <DetailsCard foodDetails={foodDetails}/>
+       
     </div>
   )
 }
