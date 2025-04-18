@@ -53,7 +53,7 @@ const Navbar = () => {
       
         <Link href='/'>Home</Link>
         <Link href='/add-foods'>Add Foods</Link>
-        <Link href='/'>All Foods</Link>
+        <Link href='/all-foods'>All Foods</Link>
       </div>
 
       <div className="">

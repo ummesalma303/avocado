@@ -1,15 +1,15 @@
 import Banner from "@/components/Banner";
+import Card from "@/components/Card";
 import Deals from "@/components/Deals";
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (
     <div>
-      <Navbar/>
+      
       <Banner/>
+      <Card/>
       <Deals/>
-      <Footer/>
+     
     </div>
   );
 }

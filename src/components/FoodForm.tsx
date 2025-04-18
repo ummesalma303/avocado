@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "sonner"
+import { ImCross } from "react-icons/im";
 
 const FoodForm = () => {
     const { register, handleSubmit,  formState: { errors } } = useForm();
@@ -25,18 +26,20 @@ const FoodForm = () => {
       })
       const data = await res.json()
       if ( data.insertedId) {
-        toast("Event has been created", {
-          description: "Sunday, December 03, 2023 at 9:00 AM",
+       
+        toast("Food successfully add", {
+          // description: "Sunday, December 03, 2023 at 9:00 AM",
           action: {
-            label: "Undo",
+            label: <ImCross className=''/>,
             onClick: () => console.log("Undo"),
           },
+          duration: 3000,
         })
-        console.log('dg--------fss')
       }
       console.log(data)
     
       } catch (error) {
+        toast.error(String(error), { duration: 5000 });
         console.log(error)
       }
     };   
@@ -53,6 +56,14 @@ const FoodForm = () => {
               <Label htmlFor="name">Food Name</Label>
               <Input type='text' id="foodName" placeholder="Food Name" {...register("foodName",{ required: true })} />
               <p> {errors.foodName && <span className='text-red-500'>This field is required</span>}
+              </p>
+
+            </div>
+            {/* food Image */}
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="name" >Food Image Url</Label>
+              <Input type='url' id="foodImage" placeholder="Food Image Url" {...register("foodImage",{ required: true })} />
+              <p> {errors.foodImage && <span className='text-red-500'>This field is required</span>}
               </p>
 
             </div>
