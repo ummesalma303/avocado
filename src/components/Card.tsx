@@ -18,7 +18,7 @@ interface Food {
 // const Card= ({ food }:{ food: Food }) => {
 const Card: React.FC <Food> = ({ food }) => {
   const { _id, foodName, price, foodImage } = food || {}
-  console.log(food)
+  // console.log(food)
     
   return (
     <div className=''>
