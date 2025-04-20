@@ -35,8 +35,21 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { ObjectId } from "mongodb"
+import Image from "next/image"
 // import { useRouter } from "next/router"
-import { DataContext } from "@/provider/DataProvider"
+// import { DataContext } from "@/provider/DataProvider"
+
+interface User {
+  _id: string;
+  name: string;
+  photo: string;
+  email: string;
+  password: string;
+}
+interface DataTableProps {
+  users: User[];
+}
 
 // const data: Payment[] = [
 //   {
@@ -90,90 +103,146 @@ export type Payment = {
   email: string
 }
 
-export const columns: ColumnDef<Payment>[] = [
+// export const columns: ColumnDef<User>[] = [
 //   {
-//     id: "select",
-//     // header: ({ table }) => (
-//     // //   <Checkbox
-//     // //     checked={
-//     // //       table.getIsAllPageRowsSelected() ||
-//     // //       (table.getIsSomePageRowsSelected() && "indeterminate")
-//     // //     }
-//     // //     onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-//     // //     aria-label="Select all"
-//     // //   />
-//     // ),
-//     // cell: ({ row }) => (
-//     //   <Checkbox
-//     //     checked={row.getIsSelected()}
-//     //     onCheckedChange={(value) => row.toggleSelected(!!value)}
-//     //     aria-label="Select row"
-//     //   />
-//     // ),
-//     enableSorting: false,
-//     enableHiding: false,
+//     accessorKey: "name",
+//     header: "Name",
+//     cell: ({ row }) => (
+//       <div className="flex items-center gap-2">
+//         <Image width={50} height={50} 
+//           src={row.original.photo} 
+//           alt={row.getValue("name")}
+//           className="h-8 w-8 rounded-full"
+//         />
+//         <span>{row.getValue("name")}</span>
+//       </div>
+//     ),
+//   },  
+//   {
+//     accessorKey: "email",
+//     header: ({ column }) => (
+//       <Button
+//         variant="ghost"
+//         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+//       >
+//         Email
+//         <ArrowUpDown className="ml-2 h-4 w-4" />
+//       </Button>
+//     ),
+//     cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
 //   },
+//   {
+//     accessorKey: "status",
+//     header: "Status",
+//     cell: ({ row }) => (
+//       <div className="capitalize">
+//         {row.getValue("status") || "Active"} {/* Default to Active if no status */}
+//       </div>
+//     ),
+//   },
+  
+//   // {
+//   //   id: "actions",
+//   //   enableHiding: false,
+//   //   cell: ({ row }) => {
+//   //     const payment = row.original
+
+//   //     return (
+//   //       <DropdownMenu>
+//   //         <DropdownMenuTrigger asChild>
+//   //           <Button variant="ghost" className="h-8 w-8 p-0">
+//   //             <span className="sr-only">Open menu</span>
+//   //             <MoreHorizontal />
+//   //           </Button>
+//   //         </DropdownMenuTrigger>
+//   //         <DropdownMenuContent align="end">
+//   //           <DropdownMenuLabel>Actions</DropdownMenuLabel>
+//   //           <DropdownMenuItem
+//   //             onClick={() => navigator.clipboard.writeText(payment.id)}
+//   //           >
+//   //             Copy payment ID
+//   //           </DropdownMenuItem>
+//   //           <DropdownMenuSeparator />
+//   //           <DropdownMenuItem>View customer</DropdownMenuItem>
+//   //           <DropdownMenuItem>View payment details</DropdownMenuItem>
+//   //         </DropdownMenuContent>
+//   //       </DropdownMenu>
+//   //     )
+//   //   },
+//   // },
+// ]
+export const columns: ColumnDef<User>[] = [
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: "name",
+    header: "Name",
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("status")}</div>
+      <div className="flex items-center gap-2">
+        <Image 
+          width={32}
+          height={32}
+          src={row.original.photo} 
+          alt={row.getValue("name")}
+          className="h-8 w-8 rounded-full"
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = '/default-avatar.png'
+          }}
+        />
+        <span>{row.getValue("name")}</span>
+      </div>
     ),
-  },
+  },  
   {
     accessorKey: "email",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Email
-          <ArrowUpDown />
-        </Button>
-      )
-    },
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Email
+        <ArrowUpDown className="ml-2 h-4 w-4" />
+      </Button>
+    ),
     cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
   },
-  {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"))
-
-      // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount)
-
-      return <div className="text-right font-medium">{formatted}</div>
-    },
-  },
+  // {
+  //   accessorKey: "status",
+  //   header: "Status",
+  //   cell: ({ row }) => {
+  //     const status = row.getValue("status") as User['status']
+  //     return (
+  //       <div className={`capitalize ${
+  //         status === 'active' ? 'text-green-500' : 
+  //         status === 'inactive' ? 'text-red-500' : 'text-yellow-500'
+  //       }`}>
+  //         {status || "active"}
+  //       </div>
+  //     )
+  //   },
+  // },
   {
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original
+      const user = row.original
 
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
               <span className="sr-only">Open menu</span>
-              <MoreHorizontal />
+              <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
+              onClick={() => navigator.clipboard.writeText(user.email)}
             >
-              Copy payment ID
+              Copy email
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem>View profile</DropdownMenuItem>
+            <DropdownMenuItem>Edit user</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )
@@ -181,9 +250,11 @@ export const columns: ColumnDef<Payment>[] = [
   },
 ]
 
-export function DataTable() {
-   const {data} = React.useContext(DataContext)
-  //  console.log(data)
+
+
+export const DataTable: React.FC<DataTableProps> = ({ users }) => {
+  //  const {data} = React.useContext(DataContext)
+   console.log(users)
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -194,7 +265,7 @@ export function DataTable() {
   const [rowSelection, setRowSelection] = React.useState({})
 
   const table = useReactTable({
-    data,
+    users,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -326,4 +397,5 @@ export function DataTable() {
       </div>
     </div>
   )
+
 }
