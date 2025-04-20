@@ -22,9 +22,28 @@ interface IdProp {
           console.log(error)
         }
     }
+
+// update data
+
+// delete data
+const handleDelete = async (id:string) => {
+console.log(id)
+try {
+  
+  const deleteData = await fetch(`/api/foods/${id}`, {
+   method: "DELETE",
+ })
+  const res= await deleteData.json()
+  console.log(res)
+} catch (error) {
+  console.log(error)
+}
+}
   return (
-    <div className='mt-6'>
+    <div className='mt-6 space-x-6'>
        <Button onClick={()=> handleCart(id)}>Add To Cart</Button>
+       <Button>Update</Button>
+       <Button variant='destructive' onClick={()=>handleDelete(id)}>Delete</Button>
     </div>
   )
 }

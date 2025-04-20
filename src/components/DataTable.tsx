@@ -183,7 +183,7 @@ export const columns: ColumnDef<Payment>[] = [
 
 export function DataTable() {
    const {data} = React.useContext(DataContext)
-   console.log(data)
+  //  console.log(data)
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []

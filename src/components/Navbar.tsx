@@ -57,7 +57,9 @@ const Navbar = () => {
         <Link href='/cart'>Cart</Link>
       </div>
 
-      <div className="">
+      <div className="flex space-x-2">
+        <Button>Sign Up</Button>
+        <Button>Sign In</Button>
       <Avatar>
       <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
       <AvatarFallback>N/A</AvatarFallback>
