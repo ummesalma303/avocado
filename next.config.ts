@@ -19,6 +19,11 @@ const nextConfig: NextConfig = {
             hostname: "www.xuqelafije.org.uk",
 
         },
+        {
+            protocol: 'https',
+            hostname: "cdni.iconscout.com",
+
+        },
       ]
     }
 };

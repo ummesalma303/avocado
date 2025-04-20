@@ -58,8 +58,8 @@ const Navbar = () => {
       </div>
 
       <div className="flex space-x-2">
-        <Button>Sign Up</Button>
-        <Button>Sign In</Button>
+        <Link href='/sign-up'><Button>Sign Up</Button></Link>
+        <Link href='/sign-in'><Button>Sign In</Button></Link>
       <Avatar>
       <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
       <AvatarFallback>N/A</AvatarFallback>
