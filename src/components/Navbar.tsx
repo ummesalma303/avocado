@@ -19,6 +19,7 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar"
 import { IoMdMenu } from "react-icons/io";
+import { signOut } from 'next-auth/react'
 
 
 const Navbar = () => {
@@ -61,6 +62,7 @@ const Navbar = () => {
       <div className="flex space-x-2">
         <Link href='/sign-up'><Button>Sign Up</Button></Link>
         <Link href='/sign-in'><Button>Sign In</Button></Link>
+        <Button onClick={()=>signOut()}>Sign Out</Button>
       <Avatar>
       <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
       <AvatarFallback>N/A</AvatarFallback>

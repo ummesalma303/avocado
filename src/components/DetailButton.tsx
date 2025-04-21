@@ -1,7 +1,7 @@
 "use client"
 import React, { useContext } from 'react'
 import { Button } from './ui/button'
-import { DataContext } from '@/provider/DataProvider'
+import { DataContext } from '@/Providers/DataProvider'
 
 interface IdProp {
     id: string
