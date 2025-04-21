@@ -8,25 +8,26 @@ import Image from "next/image"
 // import { ImCross } from "react-icons/im"
 // import { toast } from "sonner"
 import { useForm } from "react-hook-form"
-import { signIn, useSession } from "next-auth/react"
+import { signIn, SignInResponse } from "next-auth/react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
 const SignInForm = () => {
-  const session = useSession()
-  console.log(session)
+ 
   const router = useRouter()
     const { register, handleSubmit,  formState: { errors } } = useForm();
   const onSubmit = async (usersData:object) => {
     console.log(usersData)
    try {
     //  signIn("credentials",usersData,{callbackUrl:'/'})
-    const result = await signIn("credentials", {
+    const result: SignInResponse | undefined = await signIn("credentials", {
       ...usersData,
       redirect: false, 
       callbackUrl: '/'
     });
-    if(result.ok)
+
+    if(result && result.ok)
+      console.log(result)
     router.push('/')
    } catch (error) {
     console.log(error)

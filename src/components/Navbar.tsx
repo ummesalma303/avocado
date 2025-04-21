@@ -19,10 +19,12 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar"
 import { IoMdMenu } from "react-icons/io";
-import { signOut } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 
 
 const Navbar = () => {
+  const {data, status} = useSession()
+  console.log(data,status)
   return (
     <div className='w-full py-5 sticky top-0 backdrop-blur-lg z-10'>
       <div className="w-11/12 mx-auto flex justify-between items-center">
@@ -64,7 +66,7 @@ const Navbar = () => {
         <Link href='/sign-in'><Button>Sign In</Button></Link>
         <Button onClick={()=>signOut()}>Sign Out</Button>
       <Avatar>
-      <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+      <AvatarImage src={data?'https://github.com/shadcn.png ':""} alt="@shadcn" />
       <AvatarFallback>N/A</AvatarFallback>
     </Avatar>
        

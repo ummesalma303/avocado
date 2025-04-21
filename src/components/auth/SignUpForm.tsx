@@ -8,6 +8,7 @@ import Image from "next/image"
 import { ImCross } from "react-icons/im"
 import { toast } from "sonner"
 import { useForm } from "react-hook-form"
+// import { signIn } from "next-auth/react"
 
 export function SignUpForm({ className,  ...props}: React.ComponentProps<"div">) {
   const { register, handleSubmit,  formState: { errors } } = useForm();
@@ -22,6 +23,11 @@ export function SignUpForm({ className,  ...props}: React.ComponentProps<"div">)
       body: JSON.stringify(usersData),
     })
     const data = await res.json()
+    // const result:any = await signIn("credentials", {
+    //   ...data,
+    //   redirect: false, 
+    //   callbackUrl: '/'
+    // });
     if ( data.insertedId) {
      
       toast("User successfully sign", {
@@ -38,7 +44,8 @@ export function SignUpForm({ className,  ...props}: React.ComponentProps<"div">)
     console.log(data)
   
     } catch (error) {
-      toast.error(`${error.message}`, { duration: 5000 });
+      const err = error as Error;
+      toast.error(`${err.message}`, { duration: 5000 });
       console.log(error)
       
     }
