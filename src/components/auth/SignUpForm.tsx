@@ -24,7 +24,7 @@ export function SignUpForm({ className,  ...props}: React.ComponentProps<"div">)
     const data = await res.json()
     if ( data.insertedId) {
      
-      toast("Food successfully add", {
+      toast("User successfully sign", {
         // description: "Sunday, December 03, 2023 at 9:00 AM",
         action: {
           label: <ImCross className=''/>,
@@ -32,12 +32,15 @@ export function SignUpForm({ className,  ...props}: React.ComponentProps<"div">)
         },
         duration: 3000,
       })
+    }else{
+      toast.error(`${data.err}`, { duration: 3000 });
     }
     console.log(data)
   
     } catch (error) {
-      toast.error(String(error), { duration: 5000 });
+      toast.error(`${error.message}`, { duration: 5000 });
       console.log(error)
+      
     }
   };   
   return (
