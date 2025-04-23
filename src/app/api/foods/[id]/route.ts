@@ -11,10 +11,9 @@ export async function GET(req:Request,{ params }: { params: { id: string } }) {
 
 
 
-  export async function DELETE(request: NextRequest,{ params }: { params: { id: string } }) {
+  export async function DELETE(req:NextRequest,{ params }: { params: { id: string } }) {
     const id = params.id
     
-    console.log('------------15------------', request)
     console.log('------------15------------', id)
     const result = await dbConnect(collection.foods).deleteOne({ _id: new ObjectId(id) })
     return Response.json(result);

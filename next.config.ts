@@ -24,6 +24,11 @@ const nextConfig: NextConfig = {
             hostname: "cdni.iconscout.com",
 
         },
+        {
+            protocol: 'https',
+            hostname: "www.kalexegimipu.me.uk",
+
+        },
       ]
     }
 };
