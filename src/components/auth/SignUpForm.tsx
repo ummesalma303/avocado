@@ -8,9 +8,12 @@ import Image from "next/image"
 import { ImCross } from "react-icons/im"
 import { toast } from "sonner"
 import { useForm } from "react-hook-form"
+import { signIn, SignInResponse } from "next-auth/react"
+import { useRouter } from "next/navigation"
 // import { signIn } from "next-auth/react"
 
 export function SignUpForm({ className,  ...props}: React.ComponentProps<"div">) {
+  const router = useRouter()
   const { register, handleSubmit,  formState: { errors } } = useForm();
   const onSubmit = async (usersData:object) => {
     console.log(usersData)
@@ -38,6 +41,14 @@ export function SignUpForm({ className,  ...props}: React.ComponentProps<"div">)
         },
         duration: 3000,
       })
+      const result: SignInResponse | undefined = await signIn("credentials", {
+            ...usersData,
+            redirect: false, 
+            callbackUrl: '/'
+          });
+          if(result && result.ok){
+            router.push('/')
+          }
     }else{
       toast.error(`${data.err}`, { duration: 3000 });
     }

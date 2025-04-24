@@ -62,13 +62,21 @@ const Navbar = () => {
       </div>
 
       <div className="flex space-x-2">
-        <Link href='/sign-up'><Button>Sign Up</Button></Link>
-        <Link href='/sign-in'><Button>Sign In</Button></Link>
-        <Button onClick={()=>signOut()}>Sign Out</Button>
-      <Avatar>
+        {
+          status === 'authenticated'?
+          <>
+          <Button onClick={()=>signOut()}>Sign Out</Button>
+          <Avatar>
       <AvatarImage src={data?'https://github.com/shadcn.png ':""} alt="@shadcn" />
       <AvatarFallback>N/A</AvatarFallback>
     </Avatar>
+          </>:<> 
+        <Link href='/sign-up'><Button>Sign Up</Button></Link>
+        <Link href='/sign-in'><Button>Sign In</Button></Link></>
+        }
+       
+        
+      
        
      
       </div>
