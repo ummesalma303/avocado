@@ -2,25 +2,50 @@
 import React, { useContext } from 'react'
 import { Button } from './ui/button'
 import { DataContext } from '@/Providers/DataProvider'
+import { useSession } from 'next-auth/react'
+import { toast } from 'sonner'
+import { ImCross } from 'react-icons/im'
 
 interface IdProp {
     id: string
  }
 
- const DetailButton: React.FC<IdProp> = ({ id }) => {
+ const DetailButton: React.FC<IdProp> = ({foodDetails, id }) => {
+   const {data:session, status} = useSession()
+  //  console.log(session?.user?.email)
+   const email = session?.user?.email
   // const [cart,setCart] = useState({})
   const {data,setData} = useContext(DataContext)
     console.log(data,'data -----------------')
-    const handleCart= async (id:string)=>{
-        console.log(id)
+    const handleCart= async (foodDetails)=>{
+        console.log(foodDetails)
+        const carts = {...foodDetails, count:0}
         try {
-          const data = await fetch(`http://localhost:3000/api/foods/${id}`)
-        const res = await data.json()
-        setData(res)
-          console.log(res)
-        } catch (error) {
-          console.log(error)
-        }
+          const res = await fetch('http://localhost:3000/api/cart', {
+           method: 'POST',
+           headers: {
+             'Content-Type': 'application/json',
+           },
+           body: JSON.stringify(carts),
+         })
+         const data = await res.json()
+         if ( data.insertedId) {
+          
+           toast("Food successfully add", {
+             // description: "Sunday, December 03, 2023 at 9:00 AM",
+             action: {
+               label: <ImCross className=''/>,
+               onClick: () => console.log("Undo"),
+             },
+             duration: 3000,
+           })
+         }
+         console.log(data)
+       
+         } catch (error) {
+           toast.error(String(error), { duration: 5000 });
+           console.log(error)
+         }
     }
 
 // update data
@@ -41,7 +66,7 @@ try {
 }
   return (
     <div className='mt-6 space-x-6'>
-       <Button onClick={()=> handleCart(id)}>Add To Cart</Button>
+       <Button onClick={()=> handleCart(foodDetails)}>Add To Cart</Button>
        <Button>Update</Button>
        <Button variant='destructive' onClick={()=>handleDelete(id)}>Delete</Button>
     </div>

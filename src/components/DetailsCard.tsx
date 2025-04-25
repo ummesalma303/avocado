@@ -32,7 +32,7 @@ const DetailsCard:React.FC <DetailsProp> = ({foodDetails}) => {
         <p>Details:{recipeDetails}</p>
 
         <div className="">
-           <DetailButton id={_id}></DetailButton>
+           <DetailButton foodDetails={foodDetails} id={_id}></DetailButton>
         </div>
       </div>
     </div>

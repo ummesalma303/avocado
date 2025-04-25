@@ -57,7 +57,7 @@ const Navbar = () => {
         <Link href='/'>Home</Link>
         <Link href='/add-foods'>Add Foods</Link>
         <Link href='/all-foods'>All Foods</Link>
-        <Link href='/all-users'>All Users</Link>
+        {/* <Link href='/all-users'>All Users</Link> */}
         <Link href='/cart'>Cart</Link>
       </div>
 
@@ -67,7 +67,7 @@ const Navbar = () => {
           <>
           <Button onClick={()=>signOut()}>Sign Out</Button>
           <Avatar>
-      <AvatarImage src={data?'https://github.com/shadcn.png ':""} alt="@shadcn" />
+      <AvatarImage src={data?`${data?.user?.photo}`:""} alt="@foods" />
       <AvatarFallback>N/A</AvatarFallback>
     </Avatar>
           </>:<> 

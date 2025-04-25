@@ -2,10 +2,10 @@ import { NextRequest } from 'next/server'
 import dbConnect, { collection } from "@/lib/dbConnect";
 import { ObjectId } from "mongodb";
 
-export async function GET(req:Request,{ params }: { params: { id: string } }) {
-    const id = params.id;
-    console.log('-----------------5',id)
-    const result = await dbConnect(collection.foods).find({_id: new ObjectId(id)}).toArray(); 
+export async function GET(req:Request,{ params }: { params: { email: string } }) {
+    const email = params.email;
+    console.log('-----------------5',email)
+    const result = await dbConnect(collection.foods).find({email}).toArray(); 
     return Response.json(result)
   }
 

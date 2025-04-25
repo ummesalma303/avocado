@@ -2,6 +2,7 @@ import { MongoClient, ServerApiVersion } from 'mongodb';
 
 export const collection = {
     users: "user",
+    cart: "cart",
     foods: "foods"
 }
 const dbConnect = (collectionName:string) => {
