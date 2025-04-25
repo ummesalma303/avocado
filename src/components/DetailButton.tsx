@@ -13,13 +13,15 @@ interface IdProp {
  const DetailButton: React.FC<IdProp> = ({foodDetails, id }) => {
    const {data:session, status} = useSession()
   //  console.log(session?.user?.email)
-   const email = session?.user?.email
+  //  const email = session?.user?.email
   // const [cart,setCart] = useState({})
   const {data,setData} = useContext(DataContext)
     console.log(data,'data -----------------')
-    const handleCart= async (foodDetails)=>{
+    const handleCart= async (id,foodDetails)=>{
+      const { _id, ...foods } = foodDetails;
+      const carts = {...foods, foodId: _id, count:0 }
         console.log(foodDetails)
-        const carts = {...foodDetails, count:0}
+        console.log(carts)
         try {
           const res = await fetch('http://localhost:3000/api/cart', {
            method: 'POST',
@@ -66,7 +68,7 @@ try {
 }
   return (
     <div className='mt-6 space-x-6'>
-       <Button onClick={()=> handleCart(foodDetails)}>Add To Cart</Button>
+       <Button onClick={()=> handleCart(id,foodDetails)}>Add To Cart</Button>
        <Button>Update</Button>
        <Button variant='destructive' onClick={()=>handleDelete(id)}>Delete</Button>
     </div>
