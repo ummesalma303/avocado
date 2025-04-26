@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { toast } from "sonner"
 import { ImCross } from "react-icons/im";
 
-const FoodForm = () => {
+const UpdateForm = () => {
     const { register, handleSubmit,  formState: { errors } } = useForm();
     // post data in mongodb
     const onSubmit = async (foodData:object) => {
@@ -108,4 +108,4 @@ const FoodForm = () => {
   )
 }
 
-export default FoodForm
+export default UpdateForm

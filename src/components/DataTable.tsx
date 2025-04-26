@@ -152,7 +152,7 @@ const handleDelete = async (id:string) => {
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
             <DropdownMenuSeparator />
-            <DropdownMenuItem><Link href={'/'}> Update items</Link></DropdownMenuItem>
+            <DropdownMenuItem><Link href={`/cart/${food._id}`}> Update items</Link></DropdownMenuItem>
             <DropdownMenuItem onClick={()=>handleDelete(food._id)} className="text-red-500"> Delete items</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
