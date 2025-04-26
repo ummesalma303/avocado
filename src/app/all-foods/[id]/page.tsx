@@ -2,15 +2,7 @@ import DetailsCard from '@/components/DetailsCard'
 import dbConnect, { collection } from '@/lib/dbConnect'
 import React from 'react'
 
-// interface Food {
-//     _id: string;
-//        foodName: string;
-//        foodImage: string;
-//        category: string;
-//        price: string;
-//        recipeDetails: string;
- 
-// }
+
 
 const FoodDetails = async () => {
     // const foodDetails:any = await dbConnect(collection.foods).findOne()

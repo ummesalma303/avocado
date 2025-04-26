@@ -5,19 +5,26 @@ import { DataContext } from '@/Providers/DataProvider'
 import { useSession } from 'next-auth/react'
 import { toast } from 'sonner'
 import { ImCross } from 'react-icons/im'
+import { useRouter } from 'next/navigation'
 
-interface IdProp {
-    id: string
- }
 
- const DetailButton: React.FC<IdProp> = ({foodDetails, id }) => {
-   const {data:session, status} = useSession()
-  //  console.log(session?.user?.email)
-  //  const email = session?.user?.email
-  // const [cart,setCart] = useState({})
-  const {data,setData} = useContext(DataContext)
-    console.log(data,'data -----------------')
-    const handleCart= async (id,foodDetails)=>{
+ export interface Food {
+  foodDetails:{
+    _id: string
+  foodName: string
+  foodImage: string
+  category: string
+  price: string
+  recipeDetails: string
+  },
+  id?:string
+}
+
+ const DetailButton: React.FC<Food> = ({foodDetails, id }) => {
+  //  const {data:session, status} = useSession()
+  //  console.log(JSON.stringify(foodDetails))
+  const router = useRouter()
+    const handleCart = async (id:string,foodDetails:Food['foodDetails'])=>{
       const { _id, ...foods } = foodDetails;
       const carts = {...foods, foodId: _id, count:0 }
         console.log(foodDetails)
@@ -41,6 +48,7 @@ interface IdProp {
              },
              duration: 3000,
            })
+           router.push('/cart')
          }
          console.log(data)
        
@@ -68,9 +76,8 @@ interface IdProp {
 // }
   return (
     <div className='mt-6 space-x-6'>
-       <Button onClick={()=> handleCart(id,foodDetails)}>Add To Cart</Button>
-       <Button>Update</Button>
-       {/* <Button variant='destructive' onClick={()=>handleDelete(id)}>Delete</Button> */}
+       <Button onClick={()=> handleCart(id||'',foodDetails)}>Add To Cart</Button>
+     
     </div>
   )
 }

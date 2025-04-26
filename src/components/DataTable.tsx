@@ -16,7 +16,6 @@ import {
 import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -43,45 +42,7 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar"
 import { useRouter } from "next/navigation";
-// const data: Payment[] = [
-//   {
-//     id: "m5gr84i9",
-//     amount: 316,
-//     status: "success",
-//     email: "ken99@example.com",
-//   },
-//   {
-//     id: "3u1reuv4",
-//     amount: 242,
-//     status: "success",
-//     email: "Abe45@example.com",
-//   },
-//   {
-//     id: "derv1ws0",
-//     amount: 837,
-//     status: "processing",
-//     email: "Monserrat44@example.com",
-//   },
-//   {
-//     id: "5kma53ae",
-//     amount: 874,
-//     status: "success",
-//     email: "Silas22@example.com",
-//   },
-//   {
-//     id: "bhqecj4p",
-//     amount: 721,
-//     status: "failed",
-//     email: "carmella@example.com",
-//   },
-// ]
-
-export type Payment = {
-  id: string
-  amount: number
-  status: "pending" | "processing" | "success" | "failed"
-  email: string
-}
+import Link from "next/link"
 
 interface Food {
  food:{
@@ -100,7 +61,7 @@ export const columns: ColumnDef<Food>[] = [
     accessorKey: "food.foodImage",
     header: "Image",
     cell: ({ row }) => {
-        console.log(row)
+        // console.log(row)
         const imageUrl = row.original.foodImage;
  
     const foodName = row.original.foodName;
@@ -189,13 +150,9 @@ const handleDelete = async (id:string) => {
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            {/* <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(food._id)}
-            >
-              Copy payment ID
-            </DropdownMenuItem> */}
+
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Update items</DropdownMenuItem>
+            <DropdownMenuItem><Link href={'/'}> Update items</Link></DropdownMenuItem>
             <DropdownMenuItem onClick={()=>handleDelete(food._id)} className="text-red-500"> Delete items</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -203,10 +160,23 @@ const handleDelete = async (id:string) => {
     },
   },
 ]
-interface DataTableProps {
-  data: Food[];
+
+
+export interface CartProps {
+  data:{
+    _id: string
+    foodName: string
+    foodImage: string
+    category: string
+    price: string
+    recipeDetails: string
+    foodId?: string
+    count?: number
+  }[]
 }
-export function DataTable({ data }: DataTableProps) {
+
+export const DataTable: React.FC<CartProps> = ({ data }) => {
+  console.log(JSON.stringify(data))
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []

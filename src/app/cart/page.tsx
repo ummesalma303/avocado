@@ -6,9 +6,9 @@ import React from 'react'
 
 const Cart = async () => {
   const cart = await dbConnect(collection.cart).find().toArray()
-  console.log(cart)
+  // console.log(cart)
   return (
-    <div className='my-20 w-11/12 mx-auto bg-gray-200'>
+    <div className='my-20 w-11/12 mx-auto'>
       
       <DataTable data={cart} />
     </div>
