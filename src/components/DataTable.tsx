@@ -42,6 +42,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar"
+import { useRouter } from "next/navigation";
 // const data: Payment[] = [
 //   {
 //     id: "m5gr84i9",
@@ -161,6 +162,7 @@ export const columns: ColumnDef<Food>[] = [
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
+      const router = useRouter()
       const food = row.original
 // delete data
 const handleDelete = async (id:string) => {
@@ -172,6 +174,7 @@ const handleDelete = async (id:string) => {
    })
     const res= await deleteData.json()
     console.log(res)
+    router.refresh();
   } catch (error) {
     console.log(error)
   }
