@@ -4,7 +4,7 @@ import { ObjectId } from "mongodb";
 
 export async function GET(req:Request,{ params }: { params: { email: string } }) {
     const email = params.email;
-    console.log('-----------------5',email)
+    // console.log('-----------------5',email)
     const result = await dbConnect(collection.foods).find({email}).toArray(); 
     return Response.json(result)
   }
@@ -15,6 +15,7 @@ export async function GET(req:Request,{ params }: { params: { email: string } })
     const id = params.id
     
     console.log('------------15------------', id)
-    const result = await dbConnect(collection.foods).deleteOne({ _id: new ObjectId(id) })
+    const result = await dbConnect(collection.cart).deleteOne({ _id: new ObjectId(id) })
+    console.log(result)
     return Response.json(result);
   }
