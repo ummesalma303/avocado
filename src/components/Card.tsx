@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link';
 import React from 'react'
 
-interface Food {
+export interface Food {
  food:{
    _id: string;
   foodName: string;

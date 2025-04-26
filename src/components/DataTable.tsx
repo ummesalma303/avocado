@@ -16,7 +16,7 @@ import {
 import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-// import { Checkbox } from "@/components/ui/checkbox"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -35,22 +35,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { ObjectId } from "mongodb"
-import Image from "next/image"
-// import { useRouter } from "next/router"
-// import { DataContext } from "@/provider/DataProvider"
+// import { Food } from "./Card"
 
-interface User {
-  _id: string;
-  name: string;
-  photo: string;
-  email: string;
-  password: string;
-}
-interface DataTableProps {
-  users: User[];
-}
-
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
 // const data: Payment[] = [
 //   {
 //     id: "m5gr84i9",
@@ -77,18 +68,6 @@ interface DataTableProps {
 //     email: "Silas22@example.com",
 //   },
 //   {
-//     id: "5kma5ghj3ae",
-//     amount: 874,
-//     status: "success",
-//     email: "Silas22@example.com",
-//   },
-//   {
-//     id: "5kma5jhg3ae",
-//     amount: 874,
-//     status: "success",
-//     email: "Silas22@example.com",
-//   },
-//   {
 //     id: "bhqecj4p",
 //     amount: 721,
 //     status: "failed",
@@ -103,169 +82,138 @@ export type Payment = {
   email: string
 }
 
-// export const columns: ColumnDef<User>[] = [
-//   {
-//     accessorKey: "name",
-//     header: "Name",
-//     cell: ({ row }) => (
-//       <div className="flex items-center gap-2">
-//         <Image width={50} height={50} 
-//           src={row.original.photo} 
-//           alt={row.getValue("name")}
-//           className="h-8 w-8 rounded-full"
-//         />
-//         <span>{row.getValue("name")}</span>
-//       </div>
-//     ),
-//   },  
-//   {
-//     accessorKey: "email",
-//     header: ({ column }) => (
-//       <Button
-//         variant="ghost"
-//         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-//       >
-//         Email
-//         <ArrowUpDown className="ml-2 h-4 w-4" />
-//       </Button>
-//     ),
-//     cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
-//   },
-//   {
-//     accessorKey: "status",
-//     header: "Status",
-//     cell: ({ row }) => (
-//       <div className="capitalize">
-//         {row.getValue("status") || "Active"} {/* Default to Active if no status */}
-//       </div>
-//     ),
-//   },
-  
-//   // {
-//   //   id: "actions",
-//   //   enableHiding: false,
-//   //   cell: ({ row }) => {
-//   //     const payment = row.original
+interface Food {
+ food:{
+   _id: string;
+  foodName: string;
+  foodImage: string;
+  category: string;
+  price: string;
+  recipeDetails: string;
+};
+}
 
-//   //     return (
-//   //       <DropdownMenu>
-//   //         <DropdownMenuTrigger asChild>
-//   //           <Button variant="ghost" className="h-8 w-8 p-0">
-//   //             <span className="sr-only">Open menu</span>
-//   //             <MoreHorizontal />
-//   //           </Button>
-//   //         </DropdownMenuTrigger>
-//   //         <DropdownMenuContent align="end">
-//   //           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-//   //           <DropdownMenuItem
-//   //             onClick={() => navigator.clipboard.writeText(payment.id)}
-//   //           >
-//   //             Copy payment ID
-//   //           </DropdownMenuItem>
-//   //           <DropdownMenuSeparator />
-//   //           <DropdownMenuItem>View customer</DropdownMenuItem>
-//   //           <DropdownMenuItem>View payment details</DropdownMenuItem>
-//   //         </DropdownMenuContent>
-//   //       </DropdownMenu>
-//   //     )
-//   //   },
-//   // },
-// ]
-export const columns: ColumnDef<User>[] = [
+export const columns: ColumnDef<Food>[] = [
+  
   {
-    accessorKey: "name",
-    header: "Name",
-    cell: ({ row }) => (
-      <div className="flex items-center gap-2">
-        <Image 
-          width={32}
-          height={32}
-          src={row.original.photo} 
-          alt={row.getValue("name")}
-          className="h-8 w-8 rounded-full"
-          onError={(e) => {
-            (e.target as HTMLImageElement).src = '/default-avatar.png'
-          }}
-        />
-        <span>{row.getValue("name")}</span>
+    accessorKey: "food.foodImage",
+    header: "Image",
+    cell: ({ row }) => {
+        console.log(row)
+        const imageUrl = row.original.foodImage;
+ 
+    const foodName = row.original.foodName;
+    
+      return (
+        <div className="">
+        <Avatar>
+          <AvatarImage 
+            src={imageUrl} 
+            alt={foodName}
+          />
+          <AvatarFallback>
+            {foodName.charAt(0).toUpperCase() || 'N/A'}
+          </AvatarFallback>
+        </Avatar>
       </div>
-    ),
-  },  
-  {
-    accessorKey: "email",
-    header: ({ column }) => (
-      <Button
-        variant="ghost"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      >
-        Email
-        <ArrowUpDown className="ml-2 h-4 w-4" />
-      </Button>
-    ),
-    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
+    );
   },
-  // {
-  //   accessorKey: "status",
-  //   header: "Status",
-  //   cell: ({ row }) => {
-  //     const status = row.getValue("status") as User['status']
-  //     return (
-  //       <div className={`capitalize ${
-  //         status === 'active' ? 'text-green-500' : 
-  //         status === 'inactive' ? 'text-red-500' : 'text-yellow-500'
-  //       }`}>
-  //         {status || "active"}
-  //       </div>
-  //     )
-  //   },
-  // },
+  },
+  
+  {
+    accessorKey: "foodName",
+    header: "Food Name",
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("foodName")}</div>
+    ),
+  },
+  {
+    accessorKey: "category",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Category
+          <ArrowUpDown />
+        </Button>
+      )
+    },
+    cell: ({ row }) => <div className="lowercase">{row.getValue("category")}</div>,
+  },
+  {
+    accessorKey: "price",
+    header: () => <div className="text-right">Price</div>,
+    cell: ({ row }) => {
+      const amount = parseFloat(row.getValue("price"))
+
+      // Format the amount as a dollar amount
+      const formatted = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+      }).format(amount)
+
+      return <div className="text-right font-medium">{formatted}</div>
+    },
+  },
   {
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const user = row.original
-
+      const food = row.original
+// delete data
+const handleDelete = async (id:string) => {
+  console.log(id)
+  try {
+    
+    const deleteData = await fetch(`/api/foods/${id}`, {
+     method: "DELETE",
+   })
+    const res= await deleteData.json()
+    console.log(res)
+  } catch (error) {
+    console.log(error)
+  }
+  }
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
               <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
+              <MoreHorizontal />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(user.email)}
+            {/* <DropdownMenuItem
+              onClick={() => navigator.clipboard.writeText(food._id)}
             >
-              Copy email
-            </DropdownMenuItem>
+              Copy payment ID
+            </DropdownMenuItem> */}
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View profile</DropdownMenuItem>
-            <DropdownMenuItem>Edit user</DropdownMenuItem>
+            <DropdownMenuItem>Update items</DropdownMenuItem>
+            <DropdownMenuItem onClick={()=>handleDelete(food._id)} className="text-red-500"> Delete items</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )
     },
   },
 ]
-
-
-
-export const DataTable: React.FC<DataTableProps> = ({ users }) => {
-  //  const {data} = React.useContext(DataContext)
-   console.log(users)
+interface DataTableProps {
+  data: Food[];
+}
+export function DataTable({ data }: DataTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   )
-  console.log(columnFilters)
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
 
   const table = useReactTable({
-    users,
+    data,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -397,5 +345,4 @@ export const DataTable: React.FC<DataTableProps> = ({ users }) => {
       </div>
     </div>
   )
-
 }

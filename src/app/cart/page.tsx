@@ -1,16 +1,16 @@
-"use client"
-import { DataTable } from '@/components/DataTable'
-// import { useRouter } from 'next/router'
 
+// import { DataTable } from '@/components/DataTable'
+import { DataTable } from '@/components/DataTable'
+import dbConnect, { collection } from '@/lib/dbConnect'
 import React from 'react'
-// const router = useRouter()
-// console.log(router)
-const Cart = () => {
-    
+
+const Cart = async () => {
+  const cart = await dbConnect(collection.cart).find().toArray()
+  console.log(cart)
   return (
-    <div className='my-20 w-11/12 mx-auto bg-gray-400'>
+    <div className='my-20 w-11/12 mx-auto bg-gray-200'>
       
-      {/* <DataTable/> */}
+      <DataTable data={cart} />
     </div>
   )
 }
