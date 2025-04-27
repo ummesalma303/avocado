@@ -1,6 +1,7 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useContext } from 'react'
 import DetailButton from './DetailButton';
+// import DataProvider from '@/Providers/DataProvider';
 // import { Button } from './ui/button';
 interface DetailsProp {
     foodDetails:{
@@ -13,6 +14,7 @@ interface DetailsProp {
      };
 }
 const DetailsCard:React.FC <DetailsProp> = ({foodDetails}) => {
+  
     const { _id, foodName, price, foodImage, category, recipeDetails} = foodDetails ||{}
 
   
