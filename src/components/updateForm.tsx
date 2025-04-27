@@ -46,7 +46,7 @@ const UpdateForm = () => {
 
   return (
     <div>
-       <Card className="w-xl mx-auto mt-6">
+       <Card className="w-xl mx-auto">
       
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)}>
