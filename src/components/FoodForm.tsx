@@ -10,12 +10,14 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "sonner"
 import { ImCross } from "react-icons/im";
+import { useSession } from 'next-auth/react';
 
 const FoodForm = () => {
     const { register, handleSubmit,  formState: { errors } } = useForm();
+    const {data:session, status} = useSession()
+      console.log(session?.user?.name)
     // post data in mongodb
     const onSubmit = async (foodData:object) => {
-      console.log(foodData)
       try {
        const res = await fetch('http://localhost:3000/api/foods', {
         method: 'POST',
@@ -25,6 +27,8 @@ const FoodForm = () => {
         body: JSON.stringify(foodData),
       })
       const data = await res.json()
+      console.log(data)
+
       if ( data.insertedId) {
        
         toast("Food successfully add", {
@@ -36,7 +40,6 @@ const FoodForm = () => {
           duration: 3000,
         })
       }
-      console.log(data)
     
       } catch (error) {
         toast.error(String(error), { duration: 5000 });
@@ -46,11 +49,25 @@ const FoodForm = () => {
 
   return (
     <div>
-       <Card className="w-xl mx-auto mt-6">
+       <Card className="w-xl mx-auto mt-6 backdrop-blur-lg bg-white/50">
       
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid w-full items-center gap-4">
+            {/*  name */}
+                        <div className="flex flex-col space-y-1.5">
+                          <Label htmlFor="name">User Name</Label>
+                          <Input className='text-green-600' type='text' id="userName" disabled defaultValue={session?.user?.name || ''
+                          } {...register("userName")} />
+            
+                        </div>
+                        {/*  email */}
+                        <div className="flex flex-col space-y-1.5">
+                          <Label htmlFor="name">User Email</Label>
+                          <Input className='text-green-600' type='text' id="userEmail" defaultValue={session?.user?.name || ''
+                          } {...register("userEmail")} disabled/>
+                        
+                        </div>
             {/* food name */}
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="name">Food Name</Label>

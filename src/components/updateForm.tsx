@@ -12,67 +12,47 @@ import { toast } from "sonner"
 import { ImCross } from "react-icons/im";
 import { CartProps } from './DataTable';
 import { useSession } from 'next-auth/react';
-
-// export interface Cart {
-//   _id: string
-//   foodName: string
-//   foodImage: string
-//   category: string
-//   price: string
-//   recipeDetails: string
-//   foodId: string
-//   count: number
-// }
+import { useRouter } from 'next/navigation';
 
 const UpdateForm  = ({data}:CartProps) => {
-  // console.log(JSON.stringify(data))
-  const { _id, foodName, price, foodImage, category, recipeDetails} = data ||{}
+  const router = useRouter()
+  const { _id,  foodName, price, foodImage, category, recipeDetails} = data ||{}
   const {data:session, status} = useSession()
+  console.log(session?.user?.name)
+
     const { register, handleSubmit,  formState: { errors } } = useForm();
     // post data in mongodb
     const onSubmit = async (updateFoodData:object) => {
       console.log(updateFoodData)
       try {
-      //  const res = await fetch(`http://localhost:3000/api/foods/6801cd876a611551e1a1f588`,)
-      // const data = await res.json()
-    
-      // console.log(data)
-    
-      } catch (error) {
-        toast.error(String(error), { duration: 5000 });
-        console.log(error)
-      }
+        const res = await fetch(`/api/cart/${_id}`, {
+         method: 'PATCH',
+         headers: {
+           'Content-Type': 'application/json',
+         },
+         body: JSON.stringify(updateFoodData),
+       })
+       const data = await res.json()
+       if ( data. modifiedCount>0) {
+        
+         toast("Items successfully update", {
+           action: {
+             label: <ImCross className=''/>,
+             onClick: () => console.log("Undo"),
+           },
+           duration: 3000,
+         })
+         router.push('/cart')
+       }
+       console.log(data)
+     
+       } catch (error) {
+         toast.error(String(error), { duration: 5000 });
+         console.log(error)
+       }
     };   
 
-    // const onSubmit = async (foodData:object) => {
-    //   console.log(foodData)
-    //   try {
-    //    const res = await fetch('http://localhost:3000/api/foods', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(foodData),
-    //   })
-    //   const data = await res.json()
-    //   if ( data.insertedId) {
        
-    //     toast("Food successfully add", {
-    //       // description: "Sunday, December 03, 2023 at 9:00 AM",
-    //       action: {
-    //         label: <ImCross className=''/>,
-    //         onClick: () => console.log("Undo"),
-    //       },
-    //       duration: 3000,
-    //     })
-    //   }
-    //   console.log(data)
-    
-    //   } catch (error) {
-    //     toast.error(String(error), { duration: 5000 });
-    //     console.log(error)
-    //   }
-    // };   
 
   return (
     <div>
@@ -84,22 +64,21 @@ const UpdateForm  = ({data}:CartProps) => {
             {/*  name */}
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="name">User Name</Label>
-              <Input type='text' id="userName" value={session?.user?.name || ''} {...register("userName")} />
-            
+              <Input className='text-green-600' type='text' id="userName" disabled defaultValue={session?.user?.name || ''
+              } {...register("userName")} />
 
             </div>
             {/*  email */}
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="name">User Email</Label>
-              <Input type='email' id="userEmail" value={session?.user?.email || ''} {...register("userEmail")} />
+              <Input className='text-green-600' type='text' id="userEmail" defaultValue={session?.user?.name || ''
+              } {...register("userEmail")} disabled/>
             
-
             </div>
             {/* food name */}
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="name">Food Name</Label>
               <Input type='text' id="foodName" defaultValue={foodName
-
               } {...register("foodName")} />
             
 

@@ -1,6 +1,8 @@
 import Banner from "@/components/Banner";
 // import Card from "@/components/Card";
 import Deals from "@/components/Deals";
+import Contact from "@/components/Home/Contact";
+import RecentFood from "@/components/Home/RecentFood";
 
 export default function Home() {
   return (
@@ -8,8 +10,9 @@ export default function Home() {
       
       <Banner/>
       {/* <Card/> */}
+      <RecentFood/>
       <Deals/>
-     
+     <Contact/>
     </div>
   );
 }

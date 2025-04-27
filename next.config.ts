@@ -29,6 +29,11 @@ const nextConfig: NextConfig = {
             hostname: "www.kalexegimipu.me.uk",
 
         },
+        {
+            protocol: 'https',
+            hostname: "images.pexels.com",
+
+        },
       ]
     }
 };

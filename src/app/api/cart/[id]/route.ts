@@ -11,11 +11,15 @@ export async function GET(req:Request,{ params }: { params: { id: string } }) {
 
 export async function PATCH(req:Request,{ params }: { params: { id: string } }) {
     const id = params.id;
-    const body = req.body;
-    console.log('-----------------5',body)
+    const body = await req.json();
+    console.log('----------------- body ---------',body)
     const query = { _id:new ObjectId(id)}
     console.log('-----------------5',query)
-    const update = {$set:{...body}}
-    const result = await dbConnect(collection.cart).updateOne(query,update); 
+    const filter = {$set:{...body}}
+    const option = {
+      upsert: true
+  }
+    const result = await dbConnect(collection.cart).updateOne(query,filter,option);
+    console.log(result) 
     return Response.json(result)
   }
