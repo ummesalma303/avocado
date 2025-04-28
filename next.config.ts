@@ -34,6 +34,16 @@ const nextConfig: NextConfig = {
             hostname: "images.pexels.com",
 
         },
+        {
+            protocol: 'https',
+            hostname: "cdn.viva.org.uk",
+            
+        },
+        {
+            protocol: 'https',
+            hostname: "thumbs.dreamstime.com",
+            
+        },
       ]
     }
 };

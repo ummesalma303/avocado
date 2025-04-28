@@ -8,3 +8,19 @@ export async function POST(req: Request) {
   const result = await dbConnect(collection.foods).insertOne(body); 
   return Response.json(result)
 }
+
+
+
+  export async function GET(req:Request) {
+    // const search = req.query.search
+    const url = new URL(req.url)
+    const search = url.searchParams.get('search')
+    console.log('------------15------------', search)
+    let query = {}
+    if (search) {
+      query = { foodName: { $regex: search, $options: "i" } };
+    }
+    const result = await dbConnect(collection.cart).find(query).toArray()
+    console.log(result)
+    return Response.json(result);
+  }
