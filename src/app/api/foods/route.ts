@@ -20,7 +20,7 @@ export async function POST(req: Request) {
     if (search) {
       query = { foodName: { $regex: search, $options: "i" } };
     }
-    const result = await dbConnect(collection.cart).find(query).toArray()
+    const result = await dbConnect(collection.foods).find(query).toArray()
     console.log(result)
     return Response.json(result);
   }

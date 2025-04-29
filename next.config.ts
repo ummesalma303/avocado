@@ -21,6 +21,16 @@ const nextConfig: NextConfig = {
         },
         {
             protocol: 'https',
+            hostname: "www.health.com",
+
+        },
+        {
+            protocol: 'https',
+            hostname: "www.nutriseed.co.uk",
+
+        },
+        {
+            protocol: 'https',
             hostname: "cdni.iconscout.com",
 
         },
@@ -42,6 +52,31 @@ const nextConfig: NextConfig = {
         {
             protocol: 'https',
             hostname: "thumbs.dreamstime.com",
+            
+        },
+        {
+            protocol: 'https',
+            hostname: "m.media-amazon.com",
+            
+        },
+        {
+            protocol: 'https',
+            hostname: "krishokbazar.com.bd",
+            
+        },
+        {
+            protocol: 'https',
+            hostname: "www.shellingmachine.com",
+            
+        },
+        {
+            protocol: 'https',
+            hostname: "i.ndtvimg.com",
+            
+        },
+        {
+            protocol: 'https',
+            hostname: "i.ndtvimg.comstatic.vecteezy.com",
             
         },
       ]

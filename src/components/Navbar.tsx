@@ -8,7 +8,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
+  // DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
@@ -24,7 +24,7 @@ import { signOut, useSession } from 'next-auth/react'
 
 const Navbar = () => {
   const {data, status} = useSession()
-  // console.log(data,status)
+  console.log(status)
   return (
     <div className='w-full py-5 sticky top-0 backdrop-blur-lg z-10'>
       <div className="w-11/12 mx-auto flex justify-between items-center">
@@ -36,12 +36,20 @@ const Navbar = () => {
   <DropdownMenuTrigger><Button variant="outline"><IoMdMenu />
   </Button></DropdownMenuTrigger>
   <DropdownMenuContent>
-    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+    {/* <DropdownMenuLabel>My Account</DropdownMenuLabel> */}
     <DropdownMenuSeparator />
     <DropdownMenuItem><Link href='/'>Home</Link></DropdownMenuItem>
-    <DropdownMenuItem>Billing</DropdownMenuItem>
-    <DropdownMenuItem>Team</DropdownMenuItem>
-    <DropdownMenuItem>Subscription</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>
+      {
+        status === 'authenticated' &&<Link href='/add-foods'>Add Foods</Link> 
+      } 
+      
+      </DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem><Link href='/all-foods'>All Foods</Link></DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem><Link href='/cart'>Cart</Link></DropdownMenuItem>
   </DropdownMenuContent>
 </DropdownMenu>
 
@@ -55,7 +63,9 @@ const Navbar = () => {
       <div className="hidden md:flex space-x-3">
       
         <Link href='/'>Home</Link>
-        <Link href='/add-foods'>Add Foods</Link>
+       {
+        status === 'authenticated' &&<Link href='/add-foods'>Add Foods</Link> 
+       } 
         <Link href='/all-foods'>All Foods</Link>
         {/* <Link href='/all-users'>All Users</Link> */}
         <Link href='/cart'>Cart</Link>

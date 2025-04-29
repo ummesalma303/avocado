@@ -21,24 +21,20 @@ const Card: React.FC <Food> = ({ food }) => {
   // console.log(food)
     
   return (
-    <div className=''>
+    <div className='rounded shadow-md overflow-hidden text-center p-5'>
     <Link href={`/all-foods/${_id}`}>
-    <div className="  rounded shadow-md overflow-hidden text-center">
       {/*  */}
-    <div className="">
-          <Image width={90} height={40}
+    <div className="h-48">
+         <div className="h-24">
+         <Image width={90} height={40}
             src={foodImage || "https://organicnutrition.com.bd/cdn/shop/articles/ONL_-_Blog_2048x.progressive.png.jpg?v=1649476918"}
-            alt={foodName||"Papaya"}
+            alt={foodName}
             className="w-full h-full object-cover"
           />
+         </div>
         
-    {/* icon */}
-          <div className="">
-
-          </div>
-    </div>
       <div className="p-4">
-        <h2 className="text-sm text-gray-800 font-semibold mb-2">fghmf {foodName}</h2>
+        <h2 className="text-sm text-gray-800 font-semibold mb-2">{foodName}</h2>
         <p className="text-green-600 text-xl font-bold">${price}</p>
       </div>
     </div>
