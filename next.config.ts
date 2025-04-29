@@ -76,7 +76,7 @@ const nextConfig: NextConfig = {
         },
         {
             protocol: 'https',
-            hostname: "i.ndtvimg.comstatic.vecteezy.com",
+            hostname: "cdn.viva.org.uk",
             
         },
       ]

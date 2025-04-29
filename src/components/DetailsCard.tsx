@@ -29,7 +29,7 @@ const DetailsCard:React.FC <DetailsProp> = ({foodDetails}) => {
       </div>
       <div className="">
         <h2 className="text-lg text-gray-800 font-semibold mb-2">Food Name: {foodName || 'N/A'}</h2>
-        <p className="text-green-600 text-4xl font-bold mb-4">Price: ${price}</p>
+        <p className="text-amber-500 text-4xl font-bold mb-4">Price: ${price}</p>
         <h3>Category: {category }</h3>
         <p>Details:{recipeDetails}</p>
 

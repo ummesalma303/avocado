@@ -19,7 +19,7 @@ const AddFoods = () => {
     <div className=' min-h-screen bg-[url(https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3BmLXM4NC1tb25pa2EtZ3JhYmtvd3NrYS10aHltZS03LTAxXzIuanBn.jpg)] bg-cover bg-no-repeat bg-center flex flex-col justify-center items-center '>
     <div className="bg-linear-to-t from-[#00000032] to-[#0000002b] w-full h-full py-10">
     <div className="text-center">
-     <i className='text-green-600 font-semibold text-2xl pb-9'>Todays Hot Deals</i>
+     <i className='text-amber-500 font-semibold text-2xl pb-9'>Todays Hot Deals</i>
         <h2 className='text-2xl font-bold'>ADD AN ITEM</h2>
      </div>
     

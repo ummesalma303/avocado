@@ -64,14 +64,14 @@ const UpdateForm  = ({data}:CartProps) => {
             {/*  name */}
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="name">User Name</Label>
-              <Input className='text-green-600' type='text' id="userName" disabled defaultValue={session?.user?.name || ''
+              <Input className='text-amber-500' type='text' id="userName" disabled defaultValue={session?.user?.name || ''
               } {...register("userName")} />
 
             </div>
             {/*  email */}
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="name">User Email</Label>
-              <Input className='text-green-600' type='text' id="userEmail" defaultValue={session?.user?.name || ''
+              <Input className='text-amber-500' type='text' id="userEmail" defaultValue={session?.user?.name || ''
               } {...register("userEmail")} disabled/>
             
             </div>
