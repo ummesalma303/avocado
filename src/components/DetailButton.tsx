@@ -21,14 +21,14 @@ import { useRouter } from 'next/navigation'
 }
 
  const DetailButton: React.FC<Food> = ({foodDetails, id }) => {
-  //  const {data:session, status} = useSession()
+   const {data:session} = useSession()
+  //  console.log(session?.user.name)
   //  console.log(JSON.stringify(foodDetails))
   const router = useRouter()
     const handleCart = async (id:string,foodDetails:Food['foodDetails'])=>{
       const { _id, ...foods } = foodDetails;
-      const carts = {...foods, foodId: _id, count:0 }
-        console.log(foodDetails)
-        console.log(carts)
+      const carts = {...foods, foodId: _id, count:0, userName: session?.user?.name, email:session?.user?.email }
+       
         try {
           const res = await fetch('http://localhost:3000/api/cart', {
            method: 'POST',

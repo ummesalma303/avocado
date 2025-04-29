@@ -30,7 +30,7 @@ const AllFoods = async({searchParams}: { searchParams: any }) => {
             <Card key={i} food={food} />
           ))
         ) : (
-          <div className="col-span-full text-center text-gray-500 h-[90vh]">
+          <div className="col-span-full flex justify-center items-center text-gray-500 h-[60vh]">
             No foods found.
           </div>
         )}

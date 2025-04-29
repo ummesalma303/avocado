@@ -1,11 +1,15 @@
 
-// import { DataTable } from '@/components/DataTable'
 import { DataTable } from '@/components/DataTable'
+import { authOptions } from '@/lib/authOptions'
 import dbConnect, { collection } from '@/lib/dbConnect'
-import React from 'react'
+import { getServerSession } from 'next-auth'
+
 
 const Cart = async () => {
-  const cart = await dbConnect(collection.cart).find().toArray()
+  const session = await getServerSession(authOptions)
+  // console.log(session.user.email)
+
+  const cart = await dbConnect(collection.cart).find({email:session.user.email}).toArray()
   // console.log(cart)
   return (
     <div className='my-20 w-11/12 mx-auto'>

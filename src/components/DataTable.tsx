@@ -176,7 +176,6 @@ export interface CartProps {
 }
 
 export const DataTable: React.FC<CartProps> = ({ data }) => {
-  // console.log(JSON.stringify(data))
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []

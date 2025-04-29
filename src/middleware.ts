@@ -1,9 +1,9 @@
-import { getToken } from "next-auth/jwt"
-import { NextResponse } from "next/server"
+import { getToken, JWT } from "next-auth/jwt"
+import { NextResponse, NextRequest } from "next/server"
 
-const middleware = async (req:Request) => {
-    const token = await getToken({req})
-    // console.log('-----------------middleware--------------------',token)
+const middleware = async (req:NextRequest) => {
+    const token: JWT | null = await getToken({req})
+    console.log('-----------------middleware--------------------',token)
     if (token) {
       return NextResponse.next()
     }else{
@@ -11,6 +11,6 @@ const middleware = async (req:Request) => {
     }
 }
 
-export const config = { matcher: ["/add-foods"] }
+export const config = { matcher: ["/add-foods",'/cart'] }
 
 export default middleware

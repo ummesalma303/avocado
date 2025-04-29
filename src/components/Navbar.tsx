@@ -24,7 +24,7 @@ import { signOut, useSession } from 'next-auth/react'
 
 const Navbar = () => {
   const {data, status} = useSession()
-  console.log(status)
+  // console.log(status)
   return (
     <div className='w-full py-5 sticky top-0 backdrop-blur-lg z-10'>
       <div className="w-11/12 mx-auto flex justify-between items-center">
@@ -39,17 +39,21 @@ const Navbar = () => {
     {/* <DropdownMenuLabel>My Account</DropdownMenuLabel> */}
     <DropdownMenuSeparator />
     <DropdownMenuItem><Link href='/'>Home</Link></DropdownMenuItem>
-    <DropdownMenuSeparator />
-    <DropdownMenuItem>
+   
       {
-        status === 'authenticated' &&<Link href='/add-foods'>Add Foods</Link> 
+        status === 'authenticated' &&<>
+         <DropdownMenuItem><Link href='/add-foods'>Add Foods</Link> </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem><Link href='/cart'>Cart</Link></DropdownMenuItem>
+
+        </>
       } 
       
-      </DropdownMenuItem>
+     
     <DropdownMenuSeparator />
     <DropdownMenuItem><Link href='/all-foods'>All Foods</Link></DropdownMenuItem>
     <DropdownMenuSeparator />
-    <DropdownMenuItem><Link href='/cart'>Cart</Link></DropdownMenuItem>
+    
   </DropdownMenuContent>
 </DropdownMenu>
 
@@ -63,12 +67,16 @@ const Navbar = () => {
       <div className="hidden md:flex space-x-3">
       
         <Link href='/'>Home</Link>
-       {
-        status === 'authenticated' &&<Link href='/add-foods'>Add Foods</Link> 
-       } 
+        {
+        status === 'authenticated' &&<>
+         <Link href='/add-foods'>Add Foods</Link> 
+       <Link href='/cart'>Cart</Link>
+
+        </>
+      } 
+      
         <Link href='/all-foods'>All Foods</Link>
-        {/* <Link href='/all-users'>All Users</Link> */}
-        <Link href='/cart'>Cart</Link>
+        
       </div>
 
       <div className="flex space-x-2">
