@@ -1,8 +1,7 @@
 import Image from 'next/image'
-import React, { useContext } from 'react'
 import DetailButton from './DetailButton';
-// import DataProvider from '@/Providers/DataProvider';
-// import { Button } from './ui/button';
+
+
 interface DetailsProp {
     foodDetails:{
         _id: string;
@@ -21,7 +20,7 @@ const DetailsCard:React.FC <DetailsProp> = ({foodDetails}) => {
   return (
     <div className='flex space-x-5'>
       <div className="w-1/2">
-         <Image width={90} height={40}
+         <Image width={320} height={190}
                     src={foodImage || "https://organicnutrition.com.bd/cdn/shop/articles/ONL_-_Blog_2048x.progressive.png.jpg?v=1649476918"}
                     alt={foodName||"N/A"}
                     className="w-full h-full object-cover"

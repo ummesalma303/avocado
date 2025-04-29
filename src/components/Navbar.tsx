@@ -24,7 +24,7 @@ import { signOut, useSession } from 'next-auth/react'
 
 const Navbar = () => {
   const {data, status} = useSession()
-  // console.log(status)
+  // console.log(data)
   return (
     <div className='w-full py-5 sticky top-0 backdrop-blur-lg z-10'>
       <div className="w-11/12 mx-auto flex justify-between items-center">
@@ -76,6 +76,7 @@ const Navbar = () => {
       } 
       
         <Link href='/all-foods'>All Foods</Link>
+        {/* <Link href='/Contacts'>Contacts</Link> */}
         
       </div>
 
@@ -84,8 +85,9 @@ const Navbar = () => {
           status === 'authenticated'?
           <>
           <Button onClick={()=>signOut()}>Sign Out</Button>
-          <Avatar>
-      <AvatarImage src={data?`${data?.user?.photo}`:""} alt="@foods" />
+      <Avatar>
+         <AvatarImage src={(data?.user as {photo: string}).photo} alt="@foods" />
+         
       <AvatarFallback>N/A</AvatarFallback>
     </Avatar>
           </>:<> 

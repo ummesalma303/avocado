@@ -31,7 +31,7 @@ const AllFoods = async({searchParams}: { searchParams: any }) => {
           ))
         ) : (
           <div className="col-span-full flex justify-center items-center text-gray-500 h-[60vh]">
-            No foods found.
+            LOADING...
           </div>
         )}
     </div>

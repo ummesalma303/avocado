@@ -13,7 +13,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
+import { ArrowUpDown, ChevronDown, MoreHorizontal, Phone } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -176,6 +176,7 @@ export interface CartProps {
 }
 
 export const DataTable: React.FC<CartProps> = ({ data }) => {
+  console.log(JSON.stringify(data))
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
