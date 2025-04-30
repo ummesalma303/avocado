@@ -131,19 +131,21 @@ export const columns: ColumnDef<Food>[] = [
   },
 ]
 
+export interface CartItem {
+  _id: string;
+  foodName: string;
+  foodImage: string;
+  category: string;
+  price: string;
+  recipeDetails: string;
+  foodId: string;
+  count: number;
+  userName: string;
+  email: string;
+}
+
 export interface CartProps {
- data: {
-  _id: string
-  foodName: string
-  foodImage: string
-  category: string
-  price: string
-  recipeDetails: string
-  foodId: string
-  count: number
-  userName: string
-  email: string
-  }[]
+  data: CartItem[];
 }
 export const DataTable: React.FC<CartProps> = ({ data }) => {
   // console.log(JSON.stringify(data))

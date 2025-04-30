@@ -10,17 +10,30 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "sonner"
 import { ImCross } from "react-icons/im";
-import { CartProps } from './DataTable';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
+
+export interface CartItem {
+  _id: string,
+  foodName: string;
+  foodImage: string;
+  category: string;
+  price: string;
+  recipeDetails: string;
+}
+
+export interface CartProps {
+  data: CartItem;
+}
+
 const UpdateForm  = ({data}:CartProps) => {
   const router = useRouter()
-  const { _id,  foodName, price, foodImage, category, recipeDetails} = data ||{}
-  const {data:session, status} = useSession()
+  const {_id, foodName, price, foodImage, category, recipeDetails} = data 
+  const {data:session} = useSession()
   console.log(session?.user?.name)
 
-    const { register, handleSubmit,  formState: { errors } } = useForm();
+    const { register, handleSubmit } = useForm();
     // post data in mongodb
     const onSubmit = async (updateFoodData:object) => {
       console.log(updateFoodData)

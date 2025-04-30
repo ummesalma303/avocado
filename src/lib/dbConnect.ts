@@ -7,7 +7,7 @@ export const collection = {
 }
 const dbConnect = (collectionName:string) => {
     console.log(collectionName)
-    const uri = process.env.MONGO_URI as string;
+    const uri = process.env.NEXT_PUBLIC_MONGO_URI as string;
     console.log(uri)
     // const uri = 'mongodb+srv://ImageGalleryUser:4O58hOYRV7TBdU92@cluster0.ot76b.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
    
