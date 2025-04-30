@@ -13,16 +13,16 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, MoreHorizontal, Phone } from "lucide-react"
+import { ArrowUpDown, ChevronDown} from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
+  // DropdownMenuItem,
+  // DropdownMenuLabel,
+  // DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
@@ -41,18 +41,17 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar"
-import { useRouter } from "next/navigation";
-import Link from "next/link"
+// import { useRouter } from "next/navigation";
+// import Link from "next/link"
+import Cell from "./Cell"
 
-interface Food {
- food:{
-   _id: string;
+export interface Food {
+  _id: string;
   foodName: string;
   foodImage: string;
   category: string;
   price: string;
   recipeDetails: string;
-};
 }
 
 export const columns: ColumnDef<Food>[] = [
@@ -123,60 +122,31 @@ export const columns: ColumnDef<Food>[] = [
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const router = useRouter()
-      const food = row.original
-// delete data
-const handleDelete = async (id:string) => {
-  console.log(id)
-  try {
-    
-    const deleteData = await fetch(`/api/foods/${id}`, {
-     method: "DELETE",
-   })
-    const res= await deleteData.json()
-    console.log(res)
-    router.refresh();
-  } catch (error) {
-    console.log(error)
-  }
-  }
+      const food = row.original as Food;
+      
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-
-            <DropdownMenuSeparator />
-            <DropdownMenuItem><Link href={`/cart/${food._id}`}> Update items</Link></DropdownMenuItem>
-            <DropdownMenuItem onClick={()=>handleDelete(food._id)} className="text-red-500"> Delete items</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <Cell id={food._id} />
       )
     },
   },
 ]
 
-
 export interface CartProps {
-  data:{
-    _id: string
-    foodName: string
-    foodImage: string
-    category: string
-    price: string
-    recipeDetails: string
-    foodId?: string
-    count?: number
+ data: {
+  _id: string
+  foodName: string
+  foodImage: string
+  category: string
+  price: string
+  recipeDetails: string
+  foodId: string
+  count: number
+  userName: string
+  email: string
   }[]
 }
-
 export const DataTable: React.FC<CartProps> = ({ data }) => {
-  console.log(JSON.stringify(data))
+  // console.log(JSON.stringify(data))
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
