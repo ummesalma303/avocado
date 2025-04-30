@@ -1,4 +1,3 @@
-
 import DetailsCard from '@/components/DetailsCard'
 import dbConnect, { collection } from '@/lib/dbConnect'
 import { ObjectId } from 'mongodb'
@@ -18,17 +17,25 @@ export interface Food {
   email: string
 }
 
-const FoodDetails = async ({params}:{params:{id:string}}) => {
-  const {id} = params
+type Props = {
+  params: {
+    id: string;
+  };
+}
+const FoodDetails = async ({params}:Props) => {
+  // console.log(params)
+  const {id} =  params
+  // const p = await params
+  // console.log('--------line number->21---------',id)
+  // console.log('--------line number->21---------', params)
+  // console.log(p)
   const foodDetails = await dbConnect(collection.foods).findOne({ _id: new ObjectId(id) }) as Food | null;
 
    
     // const foodDetails:Food | null= await dbConnect(collection.foods).findOne({_id: new ObjectId(id)})
-    console.log(foodDetails)
     
-    console.log(foodDetails)
   return (
-    <div className='w-11/12 mx-auto my-10'>
+    <div className='w-11/12 mx-auto mt-24 mb-10'>
       {
         foodDetails && <DetailsCard foodDetails={foodDetails}/>
        }

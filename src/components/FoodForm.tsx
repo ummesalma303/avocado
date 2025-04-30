@@ -14,7 +14,7 @@ import { useSession } from 'next-auth/react';
 
 const FoodForm = () => {
     const { register, handleSubmit,  formState: { errors } } = useForm();
-    const {data:session, status} = useSession()
+    const {data:session} = useSession()
       console.log(session?.user?.name)
     // post data in mongodb
     const onSubmit = async (foodData:object) => {

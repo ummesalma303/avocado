@@ -1,7 +1,5 @@
 "use client"
-import React, { useContext } from 'react'
 import { Button } from './ui/button'
-import { DataContext } from '@/Providers/DataProvider'
 import { useSession } from 'next-auth/react'
 import { toast } from 'sonner'
 import { ImCross } from 'react-icons/im'

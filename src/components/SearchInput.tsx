@@ -13,7 +13,7 @@ const SearchInput = () => {
       const urlSearchQuery = new URLSearchParams(searchQuery)
       const url = `${pathName}?${urlSearchQuery}`;
       router.push(url)
-    }, [search])
+    }, [search,router,pathName])
     
   return (
     <div>

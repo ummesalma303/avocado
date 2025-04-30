@@ -3,19 +3,17 @@ import Card from '@/components/Card'
 import SearchInput from '@/components/SearchInput'
 // import dbConnect, { collection } from '@/lib/dbConnect'
 import React from 'react'
-// import { toast } from 'sonner'
+
 
 const AllFoods = async({searchParams}: { searchParams: any }) => {
   let foods:any = []
   try {
     const query = searchParams
   console.log(JSON.stringify(query))
-  // const url = url
   const res = await fetch(`http://localhost:3000/api/foods?search=${query?.search}`)
   foods = await res.json()
-  // console.log(foods)
+ 
   } catch (err) {
-    // toast.error(err)
     console.log(err)
     return []
   }

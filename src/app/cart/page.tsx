@@ -6,9 +6,9 @@ import { getServerSession } from 'next-auth'
 
 
 const Cart = async () => {
-  const session = await getServerSession(authOptions)
- 
-  const cart = await dbConnect(collection.cart).find<CartItem>({email:session.user.email}).toArray()
+  const session:unknown = await getServerSession(authOptions);
+  console.log(session)
+  const cart = await dbConnect(collection.cart).find<CartItem>({email:session?.user?.email}).toArray()
   console.log(JSON.stringify(cart))
   return (
     <div className='my-20 w-11/12 mx-auto'>

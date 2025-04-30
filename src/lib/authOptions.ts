@@ -7,7 +7,14 @@ interface User {
   name: string
   photo: string
 }
-
+interface CustomSession extends Session {
+  user: {
+    name?: string | null;
+    email?: string | null;
+    image?: string | null;
+    photo?: string | null; // ✅ custom property
+  }
+}
 export const authOptions = {
     // Configure one or more authentication providers
     providers: [
@@ -39,13 +46,13 @@ export const authOptions = {
           session,
           token,
         }: {
-          session: Session;
+          session: CustomSession;
           token: JWT;
         }) {
-          console.log("---------jjjjjjjjjjj-------------",JSON.stringify(session))
+          // console.log("---------jjjjjjjjjjj-------------",JSON.stringify(session))
           if (token &&  session.user){
             session.user.name = token.name
-            session.user.photo = token.photo
+            session.user.photo = token.photo as string | null;
           }
           return session
         },

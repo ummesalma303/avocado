@@ -15,7 +15,7 @@ export interface Food {
 // interface CardProps {
 //   food: Food;
 // }
-// const Card= ({ food }:{ food: Food }) => {
+
 const Card: React.FC <Food> = ({ food }) => {
   const { _id, foodName, price, foodImage } = food || {}
   // console.log(food)
