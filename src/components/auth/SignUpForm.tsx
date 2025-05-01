@@ -91,10 +91,10 @@ export function SignUpForm({ className,  ...props}: React.ComponentProps<"div">)
               <div className="grid gap-2">
                 <Label htmlFor="email">Photo UrL</Label>
                 <Input
-                  id="photo"
+                  id="Image"
                   type="url"
-                  placeholder="https://photo..."
-                  required {...register("photo",{ required: true })}
+                  placeholder="https://Image..."
+                  required {...register("image",{ required: true })}
                 />
                 <p> {errors.photo && <span className='text-red-500'>This field is required</span>}
                 </p>

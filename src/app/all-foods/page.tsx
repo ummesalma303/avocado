@@ -5,6 +5,7 @@ import SearchInput from '@/components/SearchInput'
 import React from 'react'
 
 
+
 const AllFoods = async({searchParams}: { searchParams: any }) => {
   let foods:any = []
   try {

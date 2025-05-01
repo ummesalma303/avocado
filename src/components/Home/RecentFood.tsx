@@ -1,19 +1,20 @@
-import dbConnect, { collection } from '@/lib/dbConnect'
+// import dbConnect, { collection } from '@/lib/dbConnect'
 import React from 'react'
 import Card from '../Card'
 
-type Food = {
-  _id: string;
-  foodName: string;
-  price: number;
-  category:string
-  image: string;
-  description?: string;
-};
+// type Food = {
+//   _id: string;
+//   foodName: string;
+//   price: number;
+//   category:string
+//   image: string;
+//   description?: string;
+// };
 
 const RecentFood = async () => {
-    const foods = await dbConnect(collection.foods).find().limit(6).toArray() 
-    console.log(foods)
+    const data = await fetch('http://localhost:3000/api/popular-foods') 
+    const foods = await data.json()
+    // console.log(res)
   return (
     <div className='py-16'>
         <div className="text-center ">
@@ -22,7 +23,8 @@ const RecentFood = async () => {
         </div>
         <div className='w-11/12 mx-auto my-20 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-9'>
         {
-            foods && foods?.map((food:Food,i:number)=> <Card key={i} food={food}/>)
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            foods?.map((food:any,i:number)=> <Card key={i} food={food}/>)
         }
      
     </div>

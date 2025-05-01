@@ -3,17 +3,25 @@ import Link from 'next/link';
 import React from 'react'
 
 export interface Food {
- food:{
-   _id: string;
-  foodName: string;
+ food:{ 
+  _id: string; 
+  foodName: string; 
   foodImage: string;
-  category: string;
-  price: string;
-  recipeDetails: string;
-};
+   category: string; 
+   price: string; 
+   recipeDetails: string; }
 }
+// export interface Food {
+//   _id: string
+//   foodName: string
+//   foodImage: string
+//   category: string
+//   price: string
+//   recipeDetails: string
+// }
 
 const Card: React.FC <Food> = ({ food }) => {
+  // console.log(JSON.stringify(food))
   const { _id, foodName, price, foodImage } = food || {}
   // console.log(food)
     
