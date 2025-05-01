@@ -5,6 +5,7 @@ import SearchInput from '@/components/SearchInput'
 import React from 'react'
 
 
+export const dynamic = "force-dynamic";
 
 const AllFoods = async({searchParams}: { searchParams: any }) => {
   let foods:any = []
