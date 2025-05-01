@@ -46,42 +46,36 @@ export interface Food {
 // export default FoodDetails
 
 
-
-interface PageProps {
-  params: {
-    id: string
-  }
-}
-
-const FoodDetails = async ({ params }: PageProps) => {
-  const { id } = await params
-  let foodDetails: Food | null = null
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const FoodDetails = async ({ params }:any) => {
+  const { id } =  params;
+  let foodDetails: Food | null = null;
+  console.log(id)
   try {
     if (!ObjectId.isValid(id)) {
-      throw new Error('Invalid ID')
+      throw new Error('Invalid ID');
     }
 
     foodDetails = await dbConnect(collection.foods).findOne({
       _id: new ObjectId(id)
-    }) as Food | null
+    }) as Food | null;
 
     if (foodDetails) {
-      foodDetails._id = foodDetails._id.toString()
+      foodDetails._id = foodDetails._id.toString();
     }
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 
   if (!foodDetails) {
-    return <div className="text-center mt-24">Food not found.</div>
+    return <div className="text-center mt-24">Food not found.</div>;
   }
 
   return (
     <div className="w-11/12 mx-auto mt-24 mb-10">
       <DetailsCard foodDetails={foodDetails} />
     </div>
-  )
-}
+  );
+};
 
-export default FoodDetails
+export default FoodDetails;

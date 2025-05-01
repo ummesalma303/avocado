@@ -17,8 +17,8 @@ import { ObjectId } from "mongodb";
   //   return Response.json(result);
   // }
 
-  export async function DELETE(req:NextRequest,{ params }: { params: { id: string } }) {
-    const id = params.id
+  export async function DELETE(req:NextRequest,{ params }:{ params: Promise<{ id: string }> }) {
+    const {id} = await params
     
     console.log('------------15------------', id)
     const result = await dbConnect(collection.cart).deleteOne({ _id: new ObjectId(id) })

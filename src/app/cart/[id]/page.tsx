@@ -2,8 +2,8 @@ import UpdateForm from '@/components/updateForm'
 // import { useParams } from 'next/navigation'
 import React from 'react'
 
-const UpdateFoods = async ({params}:{params:{id:string}}) => {
-  const {id} = params
+const UpdateFoods = async ({params}:{ params: Promise<{ id: string }> }) => {
+  const {id} = await params
   const res = await fetch(`http://localhost:3000/api/cart/${id}`,)
       const data = await res.json()
   return (

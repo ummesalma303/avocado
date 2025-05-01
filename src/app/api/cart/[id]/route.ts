@@ -1,16 +1,16 @@
 import dbConnect, { collection } from "@/lib/dbConnect";
 import { ObjectId } from "mongodb";
 
-export async function GET(req:Request,{ params }: { params: { id: string } }) {
-    const id = params.id;
+export async function GET(req:Request,{ params }:{ params: Promise<{ id: string }> }) {
+    const {id} = await params;
     // console.log('-----------------5',email)
     const result = await dbConnect(collection.cart).findOne({_id:new ObjectId(id)}); 
     return Response.json(result)
   }
 
 
-export async function PATCH(req:Request,{ params }: { params: { id: string } }) {
-    const id = params.id;
+export async function PATCH(req:Request,{ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
     const body = await req.json();
     console.log('----------------- body ---------',body)
     const query = { _id:new ObjectId(id)}

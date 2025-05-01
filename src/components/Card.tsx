@@ -12,9 +12,6 @@ export interface Food {
   recipeDetails: string;
 };
 }
-// interface CardProps {
-//   food: Food;
-// }
 
 const Card: React.FC <Food> = ({ food }) => {
   const { _id, foodName, price, foodImage } = food || {}

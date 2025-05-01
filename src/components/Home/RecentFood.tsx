@@ -12,7 +12,7 @@ type Food = {
 };
 
 const RecentFood = async () => {
-    const foods:Food[] = await dbConnect(collection.foods).find().limit(6).toArray()
+    const foods = await dbConnect(collection.foods).find().limit(6).toArray() 
     console.log(foods)
   return (
     <div className='py-16'>
