@@ -1,22 +1,21 @@
 
-// import DetailsCard from '@/components/DetailsCard'
-// import dbConnect, { collection } from '@/lib/dbConnect'
-// import { ObjectId } from 'mongodb'
-// // import { useParams } from 'next/navigation'
-// import React from 'react'
+import { ObjectId } from 'mongodb'
+import React from 'react'
+import DetailsCard from '@/components/DetailsCard'
+import dbConnect, { collection } from '@/lib/dbConnect'
 
-// export interface Food {
-//   _id: string
-//   foodName: string
-//   foodImage: string
-//   category: string
-//   price: string
-//   recipeDetails: string
-//   foodId: string
-//   count: number
-//   userName: string
-//   email: string
-// }
+export interface Food {
+  _id: string
+  foodName: string
+  foodImage: string
+  category: string
+  price: string
+  recipeDetails: string
+  foodId: string
+  count: number
+  userName: string
+  email: string
+}
 
 // type Props = {
 // params: {
@@ -48,23 +47,6 @@
 
 
 
-import { ObjectId } from 'mongodb'
-import dbConnect, { collection } from '@/lib/dbConnect'
-import DetailsCard from '@/components/DetailsCard'
-
-interface Food {
-  _id: string
-  foodName: string
-  foodImage: string
-  category: string
-  price: string
-  recipeDetails: string
-  foodId: string
-  count: number
-  userName: string
-  email: string
-}
-
 interface PageProps {
   params: {
     id: string
@@ -72,15 +54,32 @@ interface PageProps {
 }
 
 const FoodDetails = async ({ params }: PageProps) => {
-  const { id } = params
+  const { id } = await params
+  let foodDetails: Food | null = null
 
-  const foodDetails = await dbConnect(collection.foods).findOne({
-    _id: new ObjectId(id)
-  }) as Food | null
+  try {
+    if (!ObjectId.isValid(id)) {
+      throw new Error('Invalid ID')
+    }
+
+    foodDetails = await dbConnect(collection.foods).findOne({
+      _id: new ObjectId(id)
+    }) as Food | null
+
+    if (foodDetails) {
+      foodDetails._id = foodDetails._id.toString()
+    }
+  } catch (error) {
+    console.error(error)
+  }
+
+  if (!foodDetails) {
+    return <div className="text-center mt-24">Food not found.</div>
+  }
 
   return (
-    <div className='w-11/12 mx-auto mt-24 mb-10'>
-      {foodDetails && <DetailsCard foodDetails={foodDetails} />}
+    <div className="w-11/12 mx-auto mt-24 mb-10">
+      <DetailsCard foodDetails={foodDetails} />
     </div>
   )
 }
