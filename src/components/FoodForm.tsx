@@ -19,7 +19,7 @@ const FoodForm = () => {
     // post data in mongodb
     const onSubmit = async (foodData:object) => {
       try {
-       const res = await fetch(`http://localhost:3000/api/foods`, {
+       const res = await fetch(`${process.env.NEXTAUTH_URL}/api/foods`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

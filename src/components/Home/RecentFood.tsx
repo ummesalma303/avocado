@@ -2,17 +2,13 @@
 import React from 'react'
 import Card from '../Card'
 
-// type Food = {
-//   _id: string;
-//   foodName: string;
-//   price: number;
-//   category:string
-//   image: string;
-//   description?: string;
-// };
 
 const RecentFood = async () => {
-    const data = await fetch(`http://localhost:3000/api/popular-foods`) 
+  // const data = await fetch('http://localhost:3000/api/popular-foods')
+
+    const data = await fetch(`http://localhost:3000/api/popular-foods`, {
+      cache: 'no-store' 
+    }) 
     const foods = await data.json()
     console.log(foods)
   return (

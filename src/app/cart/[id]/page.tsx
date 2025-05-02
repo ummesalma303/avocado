@@ -4,7 +4,7 @@ import React from 'react'
 
 const UpdateFoods = async ({params}:{ params: Promise<{ id: string }> }) => {
   const {id} = await params
-  const res = await fetch(`http://localhost:3000/api/cart/${id}`,)
+  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/cart/${id}`,)
       const data = await res.json()
   return (
     <div className='  h-screen bg-[url(https://img.freepik.com/free-vector/hand-drawn-cute-food-frame-background_23-2149602177.jpg?semt=ais_hybrid&w=740)] bg-cover bg-no-repeat bg-center flex flex-col justify-center items-center'>

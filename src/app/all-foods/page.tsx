@@ -12,7 +12,7 @@ const AllFoods = async({searchParams}: { searchParams: any }) => {
   try {
     const query = searchParams
   console.log(JSON.stringify(query))
-  const res = await fetch(`http://localhost:3000/api/foods?search=${query?.search}`)
+  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/foods?search=${query?.search}`)
   foods = await res.json()
  
   } catch (err) {

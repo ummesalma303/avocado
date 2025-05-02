@@ -28,7 +28,7 @@ import { useRouter } from 'next/navigation'
       const carts = {...foods, foodId: _id, count:0, userName: session?.user?.name, email:session?.user?.email }
        
         try {
-          const res = await fetch('http://localhost:3000/api/cart', {
+          const res = await fetch(`${process.env.NEXTAUTH_URL}/api/cart`, {
            method: 'POST',
            headers: {
              'Content-Type': 'application/json',
