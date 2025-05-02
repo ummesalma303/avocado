@@ -33,8 +33,7 @@ const Navbar = () => {
          {/* mobile menu */}
          <div className="md:hidden mr-1.5">
          <DropdownMenu>
-  <DropdownMenuTrigger><Button variant="outline"><IoMdMenu />
-  </Button></DropdownMenuTrigger>
+  <DropdownMenuTrigger><IoMdMenu /></DropdownMenuTrigger>
   <DropdownMenuContent>
     {/* <DropdownMenuLabel>My Account</DropdownMenuLabel> */}
     <DropdownMenuSeparator />
