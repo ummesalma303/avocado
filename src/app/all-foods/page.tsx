@@ -9,11 +9,13 @@ export const dynamic = "force-dynamic";
 
 const AllFoods = async({searchParams}: { searchParams: any }) => {
   let foods:any = []
+  const query = searchParams
   try {
-    const query = searchParams
-  console.log(JSON.stringify(query))
-  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/foods?search=${query?.search}`)
-  foods = await res.json()
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/foods?search=${query?.search}`,{
+      cache: 'no-store' 
+    })
+    foods = await res.json()
+    console.log('---------------------',res)
  
   } catch (err) {
     console.log(err)

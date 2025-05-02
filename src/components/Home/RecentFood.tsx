@@ -5,8 +5,8 @@ import Card from '../Card'
 
 const RecentFood = async () => {
   // const data = await fetch('http://localhost:3000/api/popular-foods')
-
-    const data = await fetch(`http://localhost:3000/api/popular-foods`, {
+console.log('-------------req----')
+    const data = await fetch(`http://localhost:3001/api/popular-foods`, {
       cache: 'no-store' 
     }) 
     const foods = await data.json()
