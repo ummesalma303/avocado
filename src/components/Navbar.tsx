@@ -38,6 +38,7 @@ const Navbar = () => {
     {/* <DropdownMenuLabel>My Account</DropdownMenuLabel> */}
     <DropdownMenuSeparator />
     <DropdownMenuItem><Link href='/'>Home</Link></DropdownMenuItem>
+    <DropdownMenuSeparator />
    
       {
         status === 'authenticated' &&<>
@@ -51,7 +52,6 @@ const Navbar = () => {
      
     <DropdownMenuSeparator />
     <DropdownMenuItem><Link href='/all-foods'>All Foods</Link></DropdownMenuItem>
-    <DropdownMenuSeparator />
     
   </DropdownMenuContent>
 </DropdownMenu>
